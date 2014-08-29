@@ -1,9 +1,12 @@
 package com.example.ankit.listview_usingxmlfile;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,6 +22,16 @@ public class ListView_ParsingXML extends ListActivity {
         this.setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, R.id.label, listitem));
 
         lv = getListView();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemname = (String) lv.getItemAtPosition(position);
+                Intent i = new Intent(getApplicationContext(), SecondActi.class);
+                i.putExtra("taken", itemname);
+                startActivity(i);
+            }
+        });
 
     }
 
